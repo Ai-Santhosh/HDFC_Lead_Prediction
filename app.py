@@ -155,9 +155,14 @@ st.markdown("""
         box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
     }
     
-    /* Sidebar styling */
+    /* Sidebar styling - White background for readability */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #004C8F 0%, #003366 100%);
+        background-color: #ffffff;
+        border-right: 1px solid #e0e0e0;
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown h3 {
+        color: #004C8F;
     }
     
     /* Table styling */
