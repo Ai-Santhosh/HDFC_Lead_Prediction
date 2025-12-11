@@ -37,10 +37,10 @@ class LeadInput(BaseModel):
     
     # Demographics
     gender: Optional[str] = Field(None, example="Male")
-    age: Optional[int] = Field(None, example=35, ge=18, le=100)
+    age: Optional[int] = Field(None, example=35)
     date_of_birth: Optional[str] = Field(None, example="1989-05-15")
     marital_status: Optional[str] = Field(None, example="Married")
-    dependents_count: Optional[int] = Field(None, example=2, ge=0)
+    dependents_count: Optional[int] = Field(None, example=2)
     education_level: Optional[str] = Field(None, example="Graduate")
     occupation: Optional[str] = Field(None, example="Salaried")
     annual_income: Optional[float] = Field(None, example=750000)
@@ -59,12 +59,12 @@ class LeadInput(BaseModel):
     
     # Financial
     credit_card_spend_last_6m: Optional[float] = Field(None, example=150000)
-    cibil_score: Optional[int] = Field(None, example=750, ge=300, le=900)
-    credit_utilization_ratio: Optional[float] = Field(None, example=0.35, ge=0, le=1)
-    existing_loans_count: Optional[int] = Field(None, example=1, ge=0)
+    cibil_score: Optional[int] = Field(None, example=750)
+    credit_utilization_ratio: Optional[float] = Field(None, example=0.35)
+    existing_loans_count: Optional[int] = Field(None, example=1)
     existing_monthly_emi: Optional[float] = Field(None, example=15000)
     avg_monthly_balance: Optional[float] = Field(None, example=50000)
-    account_tenure_years: Optional[int] = Field(None, example=5, ge=0)
+    account_tenure_years: Optional[float] = Field(None, example=5)
     
     # Lead Info
     website_lead_source: Optional[str] = Field(None, example="Google")

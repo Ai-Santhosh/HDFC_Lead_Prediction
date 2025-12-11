@@ -301,6 +301,22 @@ def prepare_data_for_api(df):
         if col not in df_clean.columns:
             df_clean[col] = np.nan
     
+    # Normalize credit_utilization_ratio (convert from percentage to decimal if > 1)
+    if 'credit_utilization_ratio' in df_clean.columns:
+        df_clean['credit_utilization_ratio'] = df_clean['credit_utilization_ratio'].apply(
+            lambda x: x / 100 if pd.notna(x) and x > 1 else x
+        )
+    
+    # Convert numeric columns to proper types
+    numeric_cols = ['age', 'dependents_count', 'annual_income', 'pincode', 
+                   'avg_monthly_app_visits', 'credit_card_spend_last_6m', 
+                   'cibil_score', 'existing_loans_count', 'existing_monthly_emi',
+                   'avg_monthly_balance', 'account_tenure_years', 'followup_count', 'data_year']
+    
+    for col in numeric_cols:
+        if col in df_clean.columns:
+            df_clean[col] = pd.to_numeric(df_clean[col], errors='coerce')
+    
     return df_clean
 
 
