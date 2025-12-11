@@ -559,6 +559,133 @@ def main():
         # Show filtered count
         st.info(f"📋 Showing {len(filtered_df):,} of {len(results_df):,} records")
         
+        # =================================================================
+        # DYNAMIC INSIGHTS - 8 Key Metric Cards (same style as Prediction Results)
+        # =================================================================
+        if len(filtered_df) > 0:
+            st.markdown("---")
+            st.markdown("### 📈 Segment Insights")
+            st.caption(f"*{selected_product} | {status_filter} | {confidence_filter}*")
+            
+            # Calculate all metrics
+            filtered_total = len(filtered_df)
+            filtered_conversions = len(filtered_df[filtered_df['Conversion_Status'] == 'Will Convert'])
+            conversion_rate = (filtered_conversions / filtered_total * 100) if filtered_total > 0 else 0
+            avg_probability = filtered_df['Probability'].mean() * 100 if 'Probability' in filtered_df.columns else 0
+            high_prob_leads = len(filtered_df[filtered_df['Probability'] >= 0.7])
+            priority_leads = len(filtered_df[(filtered_df['Probability'] >= 0.7) & (filtered_df['Confidence'] == 'High')])
+            
+            avg_cibil = filtered_df['cibil_score'].mean() if 'cibil_score' in filtered_df.columns else None
+            avg_income = filtered_df['annual_income'].mean() if 'annual_income' in filtered_df.columns else None
+            high_income = len(filtered_df[filtered_df['annual_income'] >= 1000000]) if 'annual_income' in filtered_df.columns else 0
+            
+            # Row 1: 4 Primary Metrics (same style as Prediction Results)
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>📊 Filtered Leads</h3>
+                    <div class="value">{filtered_total:,}</div>
+                    <small style="color: #666;">{(filtered_total/len(results_df)*100):.1f}% of total</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>✅ Will Convert</h3>
+                    <div class="value" style="color: #28a745;">{filtered_conversions:,}</div>
+                    <small style="color: #28a745;">{conversion_rate:.1f}% rate</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col3:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>🎯 Avg Probability</h3>
+                    <div class="value" style="color: #fd7e14;">{avg_probability:.1f}%</div>
+                    <small style="color: #666;">conversion chance</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col4:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>⭐ Priority Leads</h3>
+                    <div class="value" style="color: #e83e8c;">{priority_leads:,}</div>
+                    <small style="color: #666;">high prob + conf</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            # Row 2: 4 Financial/Profile Metrics
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                cibil_display = f"{avg_cibil:.0f}" if pd.notna(avg_cibil) else "N/A"
+                cibil_color = "#28a745" if pd.notna(avg_cibil) and avg_cibil >= 700 else "#dc3545"
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>📊 Avg CIBIL</h3>
+                    <div class="value" style="color: {cibil_color};">{cibil_display}</div>
+                    <small style="color: #666;">{"Good" if pd.notna(avg_cibil) and avg_cibil >= 700 else "Low"}</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                income_display = f"₹{avg_income/100000:.1f}L" if pd.notna(avg_income) else "N/A"
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>💰 Avg Income</h3>
+                    <div class="value" style="color: #17a2b8;">{income_display}</div>
+                    <small style="color: #666;">per year</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col3:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>🔥 High Probability</h3>
+                    <div class="value" style="color: #fd7e14;">{high_prob_leads:,}</div>
+                    <small style="color: #666;">≥70% chance</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col4:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>💎 High Value</h3>
+                    <div class="value" style="color: #6f42c1;">{high_income:,}</div>
+                    <small style="color: #666;">income ≥₹10L</small>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            # Quick Insight Summary
+            if conversion_rate >= 70:
+                insight_text = f"🎉 <strong>Excellent segment!</strong> {conversion_rate:.0f}% predicted to convert"
+                insight_color = "#28a745"
+            elif conversion_rate >= 50:
+                insight_text = f"👍 <strong>Good potential</strong> - {conversion_rate:.0f}% conversion rate"
+                insight_color = "#ffc107"
+            else:
+                insight_text = f"⚠️ <strong>Needs attention</strong> - Only {conversion_rate:.0f}% predicted to convert"
+                insight_color = "#dc3545"
+            
+            if priority_leads > 0:
+                insight_text += f" | ⭐ Focus on {priority_leads} priority leads!"
+            
+            st.markdown(f"""
+            <div style="background-color: {insight_color}20; border-left: 4px solid {insight_color}; 
+                        padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0;">
+                {insight_text}
+            </div>
+            """, unsafe_allow_html=True)
+        
+        else:
+            st.warning("No data matches the current filters. Try adjusting your selection.")
+        
+        st.markdown("---")
+        
         # Display columns to show
         display_cols = ['Conversion_Status', 'Probability', 'Confidence', 'Reasoning']
         
