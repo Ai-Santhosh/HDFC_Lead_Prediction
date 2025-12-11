@@ -1,141 +1,128 @@
+# HDFC Bank Lead Prediction System
+
 <div align="center">
 
-# 🏦 HDFC Bank Lead Prediction System
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg" alt="HDFC Bank Logo" width="280"/>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg" alt="HDFC Bank Logo" width="300"/>
-
-### *AI-Powered Lead Conversion Prediction for HDFC Bank*
+**AI-Powered Lead Conversion Prediction for HDFC Bank**
 
 ---
 
-![Python](https://img.shields.io/badge/Python-3.8+-004C8F.svg?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-004C8F.svg?style=for-the-badge&logo=fastapi&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-ED1C24.svg?style=for-the-badge&logo=streamlit&logoColor=white)
-![MLflow](https://img.shields.io/badge/MLflow-2.8+-004C8F.svg?style=for-the-badge&logo=mlflow&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2+-ED1C24.svg?style=for-the-badge&logo=scikitlearn&logoColor=white)
-
-**🎯 Predict which leads will convert | 📊 Track experiments with MLflow | 🚀 Deploy with FastAPI & Streamlit**
-
-[Features](#-features) •
-[Quick Start](#-quick-start) •
-[API Reference](#-fastapi-rest-api) •
-[Dashboard](#-streamlit-dashboard) •
-[Configuration](#%EF%B8%8F-configuration)
+![Python](https://img.shields.io/badge/Python-3.8+-004C8F.svg?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-004C8F.svg?style=flat-square&logo=fastapi&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-ED1C24.svg?style=flat-square&logo=streamlit&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-2.8+-004C8F.svg?style=flat-square&logo=mlflow&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2+-ED1C24.svg?style=flat-square&logo=scikitlearn&logoColor=white)
 
 </div>
 
 ---
 
-## 🏛️ About HDFC Bank Lead Prediction
+## Overview
 
-This **end-to-end Machine Learning solution** is designed for **HDFC Bank's sales and marketing teams** to identify high-potential leads for various banking products including:
+This **end-to-end Machine Learning solution** helps **HDFC Bank's sales and marketing teams** identify high-potential leads for various banking products.
 
-| 🏠 **Home Loans** | � **Credit Cards** | 🚗 **Vehicle Loans** | 💰 **Personal Loans** |
-|:-----------------:|:-------------------:|:--------------------:|:--------------------:|
-| Identify customers likely to convert for housing finance | Target customers for premium card offerings | Predict auto loan conversions | Personal loan lead prioritization |
+### Supported Products
 
-### 🎯 Business Impact
+| Product | Description |
+|---------|-------------|
+| **Home Loans** | Housing finance lead conversion |
+| **Credit Cards** | Premium card offerings targeting |
+| **Vehicle Loans** | Auto loan predictions |
+| **Personal Loans** | Personal loan prioritization |
+| **Insurance** | Insurance product leads |
 
-- **📈 Increase conversion rates** by focusing on high-probability leads
-- **⏱️ Save time** for relationship managers with AI-powered prioritization  
-- **💡 Data-driven decisions** using ML predictions with reasoning
-- **📊 Track performance** with comprehensive MLflow dashboards
+### Business Impact
 
----
-
-## �📋 Table of Contents
-
-- [About HDFC Bank Lead Prediction](#%EF%B8%8F-about-hdfc-bank-lead-prediction)
-- [Features](#-features)
-- [Project Structure](#-project-structure)
-- [Quick Start](#-quick-start)
-- [Training Pipeline](#-training-pipeline)
-- [Inference Options](#-inference-options)
-- [FastAPI REST API](#-fastapi-rest-api)
-- [Streamlit Dashboard](#-streamlit-dashboard)
-- [Configuration](#%EF%B8%8F-configuration)
-- [MLflow Tracking](#-mlflow-tracking)
-- [Model Details](#-model-details)
-- [Lead Scoring Factors](#-lead-scoring-factors)
-- [Troubleshooting](#-troubleshooting)
+- **Increase conversion rates** by focusing on high-probability leads
+- **Save time** for relationship managers with AI-powered prioritization
+- **Data-driven decisions** using ML predictions with reasoning
+- **Track performance** with comprehensive MLflow dashboards
 
 ---
 
-## ✨ Features
+## Table of Contents
 
-<table>
-<tr>
-<td width="50%">
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Training Pipeline](#training-pipeline)
+- [Inference Options](#inference-options)
+- [FastAPI REST API](#fastapi-rest-api)
+- [Streamlit Dashboard](#streamlit-dashboard)
+- [Configuration](#configuration)
+- [MLflow Tracking](#mlflow-tracking)
+- [Model Details](#model-details)
+- [Lead Scoring Factors](#lead-scoring-factors)
+- [Troubleshooting](#troubleshooting)
 
-### 🔷 Core Features
+---
+
+## Features
+
+### Core Features
 
 | Feature | Description |
 |---------|-------------|
-| 🎯 **One-Click Training** | Train model with single command |
-| 🚀 **REST API** | Production-ready FastAPI endpoints |
-| 📊 **Interactive Dashboard** | Streamlit UI for batch predictions |
-| 📈 **MLflow Integration** | Experiment tracking & model registry |
+| **One-Click Training** | Train model with single command |
+| **REST API** | Production-ready FastAPI endpoints |
+| **Interactive Dashboard** | Streamlit UI for batch predictions |
+| **MLflow Integration** | Experiment tracking and model registry |
 
-</td>
-<td width="50%">
-
-### � HDFC-Specific Features
+### HDFC-Specific Features
 
 | Feature | Description |
 |---------|-------------|
-| 🏦 **Product Filtering** | Filter by loan/card type |
-| 💡 **AI Reasoning** | Explains why a lead may convert |
-| 📥 **Export to CSV** | Download for CRM integration |
-| 📦 **Product Breakdown** | Stats by banking product |
-
-</td>
-</tr>
-</table>
+| **Product Filtering** | Filter by loan/card type |
+| **AI Reasoning** | Explains why a lead may convert |
+| **Export to CSV** | Download for CRM integration |
+| **Product Breakdown** | Statistics by banking product |
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-🏦 HDFC_Lead_Prediction/
+HDFC_Lead_Prediction/
 │
-├── 📂 src/                          # Source code modules
-│   ├── 📂 config/
-│   │   └── ⚙️ config.yaml           # All configuration settings
-│   ├── 📂 data/
-│   │   └── 📄 data_loader.py        # Data loading utilities
-│   ├── 📂 features/
-│   │   └── 🔧 preprocessing.py      # Data cleaning & feature engineering
-│   ├── 📂 models/
-│   │   └── 🤖 trainer.py            # Model training & evaluation
-│   └── 📂 utils/
-│       └── 🛠️ config_loader.py      # Configuration utilities
+├── src/                              # Source code modules
+│   ├── config/
+│   │   └── config.yaml               # All configuration settings
+│   ├── data/
+│   │   └── data_loader.py            # Data loading utilities
+│   ├── features/
+│   │   └── preprocessing.py          # Data cleaning and feature engineering
+│   ├── models/
+│   │   └── trainer.py                # Model training and evaluation
+│   └── utils/
+│       └── config_loader.py          # Configuration utilities
 │
-├── 📂 models/                        # Saved trained models
-│   └── 💾 best_model.pkl            # Trained model pipeline
+├── models/                           # Saved trained models
+│   └── best_model.pkl                # Trained model pipeline
 │
-├── 📂 mlruns/                        # MLflow experiment logs
+├── mlruns/                           # MLflow experiment logs
 │
-├── 🐍 main.py                        # Training pipeline script
-├── 🐍 inference.py                   # CLI inference script
-├── � api.py                         # FastAPI REST API
-├── � app.py                         # Streamlit Dashboard
+├── main.py                           # Training pipeline script
+├── inference.py                      # CLI inference script
+├── api.py                            # FastAPI REST API
+├── app.py                            # Streamlit Dashboard
 │
-├── 📄 requirements.txt               # Python dependencies
-├── � Steps.txt                      # Detailed usage guide
-└── � README.md                      # This file
+├── requirements.txt                  # Python dependencies
+├── Steps.txt                         # Detailed usage guide
+└── README.md                         # This file
 ```
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
 - Python 3.8 or higher
 - HDFC Lead Data (CSV format)
 
-### 1️⃣ Setup Environment
+### Step 1: Setup Environment
 
 ```bash
 # Navigate to project directory
@@ -152,13 +139,13 @@ source .venv/bin/activate  # Mac/Linux
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Train the Model
+### Step 2: Train the Model
 
 ```bash
 python main.py
 ```
 
-### 3️⃣ Start the Services
+### Step 3: Start the Services
 
 ```bash
 # Terminal 1: Start FastAPI (for predictions)
@@ -171,42 +158,24 @@ streamlit run app.py
 mlflow ui
 ```
 
-### 4️⃣ Access Applications
+### Step 4: Access Applications
 
-<table align="center">
-<tr>
-<td align="center">
-<h3>📊 Dashboard</h3>
-<a href="http://localhost:8501">localhost:8501</a>
-</td>
-<td align="center">
-<h3>📖 API Docs</h3>
-<a href="http://localhost:8000/docs">localhost:8000/docs</a>
-</td>
-<td align="center">
-<h3>📈 MLflow</h3>
-<a href="http://localhost:5000">localhost:5000</a>
-</td>
-</tr>
-</table>
+| Application | URL | Description |
+|-------------|-----|-------------|
+| **Dashboard** | http://localhost:8501 | Streamlit UI for predictions |
+| **API Docs** | http://localhost:8000/docs | Interactive API documentation |
+| **MLflow** | http://localhost:5000 | Experiment tracking UI |
 
 ---
 
-## 🎓 Training Pipeline
+## Training Pipeline
 
-The training pipeline transforms raw HDFC lead data into actionable predictions:
+The training pipeline transforms raw HDFC lead data into actionable predictions.
+
+### Pipeline Flow
 
 ```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  📂 Load    │ ─► │  🧹 Clean   │ ─► │  📅 Extract │ ─► │  ✂️ Split   │
-│    Data     │    │    Data     │    │   Features  │    │    Data     │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
-                                                                │
-                                                                ▼
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  � Save    │ ◄─ │  📊 Evaluate│ ◄─ │  🤖 Train   │ ◄─ │  🔧 Preproc │
-│   Model     │    │   Model     │    │   Model     │    │    Data     │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+Load Data → Clean Data → Extract Features → Split Data → Preprocess → Train Model → Evaluate → Save
 ```
 
 ### Run Training
@@ -222,7 +191,7 @@ python main.py
 | 1. Load Data | Read HDFC lead CSV | DataFrame with 120k+ records |
 | 2. Clean Data | Remove duplicates, drop PII columns | Clean DataFrame |
 | 3. Extract Features | Convert dates to year/month/day | Enhanced features |
-| 4. Split Data | 80% train, 20% test (stratified) | Train & test sets |
+| 4. Split Data | 80% train, 20% test (stratified) | Train and test sets |
 | 5. Preprocess | Impute, scale, encode | Transformed features |
 | 6. Train Model | Random Forest fitting | Trained classifier |
 | 7. Evaluate | Calculate metrics | Accuracy, F1, etc. |
@@ -231,9 +200,9 @@ python main.py
 
 ---
 
-## 🔮 Inference Options
+## Inference Options
 
-### Option 1: 📊 Streamlit Dashboard (Recommended)
+### Option 1: Streamlit Dashboard (Recommended)
 
 Best for **Relationship Managers** and **Sales Teams**:
 
@@ -241,12 +210,13 @@ Best for **Relationship Managers** and **Sales Teams**:
 streamlit run app.py
 ```
 
+Features:
 - Upload CSV with leads
 - View predictions with reasoning
 - Filter by product (Home Loan, Credit Card, etc.)
 - Download results for CRM
 
-### Option 2: 🚀 REST API
+### Option 2: REST API
 
 Best for **System Integration** and **Automation**:
 
@@ -256,7 +226,7 @@ uvicorn api:app --reload --port 8000
 
 Integrate with existing HDFC systems via API calls.
 
-### Option 3: 💻 Command Line
+### Option 3: Command Line
 
 Best for **Batch Processing**:
 
@@ -268,18 +238,18 @@ Outputs to `predictions.csv`
 
 ---
 
-## 🌐 FastAPI REST API
+## FastAPI REST API
 
-### 🔷 Endpoints
+### Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `GET` | `/` | API information |
-| `GET` | `/health` | Health check & model status |
+| `GET` | `/health` | Health check and model status |
 | `POST` | `/predict` | Single lead prediction |
 | `POST` | `/predict/batch` | Batch predictions |
 
-### 🏦 Single Lead Prediction
+### Single Lead Prediction
 
 **Request:**
 ```bash
@@ -302,12 +272,12 @@ curl -X POST "http://localhost:8000/predict" \
 ```json
 {
     "prediction": 1,
-    "probability": 0.7856,
+    "probability": 0.8542,
     "confidence": "High"
 }
 ```
 
-### 📦 Batch Prediction
+### Batch Prediction
 
 **Request:**
 ```bash
@@ -325,275 +295,190 @@ curl -X POST "http://localhost:8000/predict/batch" \
 ```json
 {
     "predictions": [
-        {"prediction": 1, "probability": 0.82, "confidence": "High"},
-        {"prediction": 0, "probability": 0.35, "confidence": "Medium"}
+        {"prediction": 1, "probability": 0.8921, "confidence": "High"},
+        {"prediction": 1, "probability": 0.8915, "confidence": "High"}
     ],
     "total_leads": 2,
-    "predicted_conversions": 1,
-    "conversion_rate": 50.0
+    "predicted_conversions": 2,
+    "conversion_rate": 100.0
 }
 ```
 
-### 📖 Interactive Documentation
+---
 
-Visit **http://localhost:8000/docs** for Swagger UI
+## Streamlit Dashboard
+
+### Features
+
+- **Upload CSV**: Drag and drop or browse for lead data
+- **Run Predictions**: One-click batch predictions
+- **View Results**: Table with predictions and reasoning
+- **Filter by Product**: Focus on specific product categories
+- **Download Results**: Export to CSV for CRM
+
+### How to Use
+
+1. Start the dashboard: `streamlit run app.py`
+2. Upload your CSV file with lead data
+3. Click "Run Predictions"
+4. View results with conversion probability and confidence
+5. Filter by product, status, or confidence level
+6. Download results as CSV
 
 ---
 
-## 📊 Streamlit Dashboard
+## Configuration
 
-<div align="center">
-
-### 🏦 HDFC Lead Prediction Dashboard
-
-*An intuitive interface for sales and marketing teams*
-
-</div>
-
-### Dashboard Features
-
-| Section | Description |
-|---------|-------------|
-| 📊 **Summary Metrics** | Total leads, predicted conversions, conversion rate |
-| 🔍 **Smart Filters** | Filter by product, status, confidence |
-| � **AI Reasoning** | Understand why each lead is scored |
-| �📥 **Download Options** | Full CSV, summary, or by product |
-| 📦 **Product Breakdown** | Stats per banking product |
-
-### Start Dashboard
-
-```bash
-streamlit run app.py
-```
-
-### Usage Flow
-
-```
-1️⃣ Upload CSV → 2️⃣ Run Predictions → 3️⃣ View Results → 4️⃣ Filter Data → 5️⃣ Download CSV
-```
-
----
-
-## ⚙️ Configuration
-
-All settings in `src/config/config.yaml`:
+All settings are in `src/config/config.yaml`:
 
 ```yaml
-# HDFC Project Configuration
-project:
-  name: "HDFC_Lead_Prediction"
-  version: "1.0.0"
-
 # Data Settings
 data:
-  csv_filepath: "HDFC_TN_Leads_120k.csv"
+  file_path: "HDFC_TN_Leads_120k.csv"
   target_column: "conversion_flag"
-  
-  # Columns to remove (PII, IDs, target leakage)
-  drop_columns:
-    - "customer_id"
-    - "first_name"
-    - "last_name"
-    - "mobile_number"
-    - "email"
-    # ... more
 
-# Model Configuration (Optimized for HDFC data)
+# Model Settings
 model:
-  name: "random_forest"
-  params:
+  algorithm: "RandomForest"
+  parameters:
     n_estimators: 100
     max_depth: 10
     min_samples_split: 2
     min_samples_leaf: 1
     random_state: 42
 
-# MLflow Tracking
-mlflow:
-  experiment_name: "HDFC_Lead_Prediction"
+# Training Settings
+training:
+  test_size: 0.2
+  stratify: true
 ```
 
 ---
 
-## 📈 MLflow Tracking
+## MLflow Tracking
 
-### Start MLflow UI
+MLflow tracks all experiments with metrics prefixed by stage:
+
+| Stage | Prefix | Metrics Tracked |
+|-------|--------|-----------------|
+| Training | `train_` | accuracy, f1, precision, recall |
+| Testing | `test_` | accuracy, f1, precision, recall |
+| Inference | `inference_` | predictions count, conversion rate |
+
+### View Experiments
 
 ```bash
 mlflow ui
 ```
 
-Visit **http://localhost:5000**
-
-### Tracked Metrics
-
-| Metric | Description |
-|--------|-------------|
-| `train_accuracy` | Training set accuracy |
-| `train_precision` | Training precision |
-| `train_recall` | Training recall |
-| `train_f1_score` | Training F1 score |
-| `test_accuracy` | Test set accuracy |
-| `test_precision` | Test precision |
-| `test_recall` | Test recall |
-| `test_f1_score` | Test F1 score |
-
-### Metrics Prefixes
-
-| Prefix | Source |
-|--------|--------|
-| `train_*` | Training evaluation |
-| `test_*` | Test evaluation |
-| `inference_*` | CLI inference |
-| `api_*` | API predictions |
+Access at http://localhost:5000
 
 ---
 
-## 🤖 Model Details
+## Model Details
 
-### Algorithm: Random Forest Classifier
+### Algorithm
 
-An ensemble of **100 decision trees** optimized for HDFC lead data.
+**Random Forest Classifier** with optimized parameters:
 
-### Optimized Parameters
-
-| Parameter | Value | Purpose |
-|-----------|-------|---------|
-| `n_estimators` | 100 | Number of trees in forest |
-| `max_depth` | 10 | Maximum depth of trees |
-| `min_samples_split` | 2 | Min samples to split node |
-| `min_samples_leaf` | 1 | Min samples in leaf node |
+| Parameter | Value |
+|-----------|-------|
+| n_estimators | 100 |
+| max_depth | 10 |
+| min_samples_split | 2 |
+| min_samples_leaf | 1 |
 
 ### Preprocessing Pipeline
 
-| Step | Numerical | Categorical |
-|------|-----------|-------------|
-| **Missing Values** | Median imputation | Mode imputation |
-| **Transformation** | StandardScaler | OneHotEncoder |
+1. **Numeric Features**: Mean imputation + Standard scaling
+2. **Categorical Features**: Mode imputation + One-hot encoding
+3. **Date Features**: Extract year, month, day components
 
 ---
 
-## 💡 Lead Scoring Factors
+## Lead Scoring Factors
 
-The model considers these key factors when scoring HDFC leads:
-
-<table>
-<tr>
-<td width="50%">
-
-### 🔷 Positive Indicators
+### Positive Indicators
 
 | Factor | Impact |
 |--------|--------|
-| ✅ High CIBIL score (750+) | Strong positive |
-| ✅ High annual income | Strong positive |
-| ✅ Long account tenure (5+ years) | Positive |
-| ✅ Low credit utilization (<30%) | Positive |
-| ✅ Multiple followups | Indicates interest |
-| ✅ High app engagement | Digital savvy |
+| CIBIL Score >= 750 | High conversion likelihood |
+| Annual Income >= 10L | Premium segment, higher conversion |
+| Account Tenure >= 5 years | Loyal customer, trust established |
+| Low Credit Utilization | Healthy finances |
+| High App Engagement | Digital-savvy, responsive |
 
-</td>
-<td width="50%">
-
-### 🔶 Risk Indicators
+### Risk Indicators
 
 | Factor | Impact |
 |--------|--------|
-| ⚠️ Low CIBIL score (<650) | Negative |
-| ⚠️ High credit utilization (>70%) | Concerning |
-| ⚠️ Multiple existing loans | Risk factor |
-| ⚠️ Low income for product type | May not qualify |
-| ⚠️ No followup engagement | Low interest |
+| CIBIL Score < 650 | Credit risk, lower approval |
+| High Credit Utilization | Financial stress indicator |
+| Low Account Tenure | New customer, less data |
+| No Digital Engagement | Harder to reach |
 
-</td>
-</tr>
-</table>
+### Sample AI Reasoning
 
-### AI Reasoning Examples
-
-The dashboard provides reasoning like:
-
-- *"🎯 High conversion likelihood | ✅ Excellent credit score (782) | 💰 High income (₹12,00,000) | 🏦 Long-term customer (7 years)"*
-- *"📉 Lower conversion probability | ⚠️ High credit utilization (78%) | 📞 Multiple followups (4)"*
+```
+High conversion likelihood | Excellent credit score (780) | High income segment | Long-term customer (6 years)
+```
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
 | Issue | Solution |
 |-------|----------|
-| `ModuleNotFoundError` | Activate venv: `source .venv/bin/activate` |
-| `FileNotFoundError` (CSV) | Check `csv_filepath` in config.yaml |
-| `Model not found` | Run training: `python main.py` |
-| `API Not Connected` | Start API: `uvicorn api:app --port 8000` |
-| Port in use | Use different port: `--port 8001` |
+| Model not found | Run `python main.py` to train |
+| API not responding | Check if uvicorn is running on port 8000 |
+| Streamlit error | Ensure API is running before dashboard |
+| Import errors | Install dependencies: `pip install -r requirements.txt` |
 
 ### Health Check Commands
 
 ```bash
-# Check API status
+# Check API health
 curl http://localhost:8000/health
 
-# Verify model exists
-ls -la models/best_model.pkl
-
-# Check Streamlit
-curl http://localhost:8501/_stcore/health
+# Check if model is loaded
+curl http://localhost:8000/
 ```
 
 ---
 
-## 📋 Quick Reference
+## Quick Reference
 
-<table align="center">
-<tr>
-<th>Task</th>
-<th>Command</th>
-</tr>
-<tr>
-<td>🎓 Train Model</td>
-<td><code>python main.py</code></td>
-</tr>
-<tr>
-<td>💻 CLI Inference</td>
-<td><code>python inference.py</code></td>
-</tr>
-<tr>
-<td>🚀 Start API</td>
-<td><code>uvicorn api:app --reload --port 8000</code></td>
-</tr>
-<tr>
-<td>📊 Start Dashboard</td>
-<td><code>streamlit run app.py</code></td>
-</tr>
-<tr>
-<td>📈 Start MLflow</td>
-<td><code>mlflow ui</code></td>
-</tr>
-</table>
+### Commands
 
-### 🔗 Quick Links
+| Action | Command |
+|--------|---------|
+| Train Model | `python main.py` |
+| Start API | `uvicorn api:app --reload --port 8000` |
+| Start Dashboard | `streamlit run app.py` |
+| Start MLflow | `mlflow ui` |
+| CLI Inference | `python inference.py` |
 
-| Service | Local URL |
-|---------|-----------|
-| 📊 Dashboard | http://localhost:8501 |
-| 📖 API Docs | http://localhost:8000/docs |
-| 📈 MLflow | http://localhost:5000 |
+### URLs
+
+| Service | URL |
+|---------|-----|
+| Dashboard | http://localhost:8501 |
+| API Docs | http://localhost:8000/docs |
+| MLflow UI | http://localhost:5000 |
+| Health Check | http://localhost:8000/health |
 
 ---
 
 <div align="center">
 
-### 🏦 HDFC Bank Lead Prediction System
+**HDFC Bank Lead Prediction System**
 
-**Empowering sales teams with AI-driven insights**
+Built with Python, FastAPI, Streamlit, and MLflow
 
 ---
 
-*Built for HDFC Bank's Lead Management & Conversion Optimization*
-
-<sub>Made with ❤️ using Python, FastAPI, Streamlit & MLflow</sub>
+*For internal use by HDFC Bank Sales and Marketing Teams*
 
 </div>
