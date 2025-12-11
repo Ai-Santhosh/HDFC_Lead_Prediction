@@ -20,7 +20,7 @@ from datetime import datetime
 
 st.set_page_config(
     page_title="HDFC Lead Prediction",
-    page_icon="🏦",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -36,48 +36,53 @@ st.markdown("""
         padding-top: 2rem;
     }
     
+    /* HDFC Theme Colors: Blue #004C8F, Red #ED1C24 */
+    
     /* Header styling */
     .main-header {
-        background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+        background: linear-gradient(135deg, #004C8F 0%, #003366 100%);
         padding: 2rem;
-        border-radius: 15px;
+        border-radius: 10px;
         margin-bottom: 2rem;
         color: white;
         text-align: center;
+        border-bottom: 4px solid #ED1C24;
     }
     
     .main-header h1 {
         color: white;
         margin-bottom: 0.5rem;
+        font-weight: 600;
     }
     
     .main-header p {
-        color: #b8d4e8;
+        color: #cce0f5;
         font-size: 1.1rem;
     }
     
-    /* Metric cards */
+    /* Metric cards - HDFC Style */
     .metric-card {
         background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-left: 4px solid #2d5a87;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 76, 143, 0.1);
+        border-left: 4px solid #004C8F;
         margin-bottom: 1rem;
     }
     
     .metric-card h3 {
-        color: #1e3a5f;
+        color: #004C8F;
         margin-bottom: 0.5rem;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
+        font-weight: 600;
     }
     
     .metric-card .value {
-        color: #2d5a87;
-        font-size: 2rem;
-        font-weight: bold;
+        color: #003366;
+        font-size: 1.8rem;
+        font-weight: 700;
     }
     
     /* Status badges */
@@ -85,16 +90,16 @@ st.markdown("""
         background-color: #28a745;
         color: white;
         padding: 0.3rem 0.8rem;
-        border-radius: 20px;
+        border-radius: 4px;
         font-size: 0.85rem;
         font-weight: 500;
     }
     
     .status-not-convert {
-        background-color: #dc3545;
+        background-color: #ED1C24;
         color: white;
         padding: 0.3rem 0.8rem;
-        border-radius: 20px;
+        border-radius: 4px;
         font-size: 0.85rem;
         font-weight: 500;
     }
@@ -104,7 +109,7 @@ st.markdown("""
         background-color: #28a745;
         color: white;
         padding: 0.2rem 0.6rem;
-        border-radius: 10px;
+        border-radius: 4px;
         font-size: 0.75rem;
     }
     
@@ -112,15 +117,15 @@ st.markdown("""
         background-color: #ffc107;
         color: #333;
         padding: 0.2rem 0.6rem;
-        border-radius: 10px;
+        border-radius: 4px;
         font-size: 0.75rem;
     }
     
     .confidence-low {
-        background-color: #dc3545;
+        background-color: #ED1C24;
         color: white;
         padding: 0.2rem 0.6rem;
-        border-radius: 10px;
+        border-radius: 4px;
         font-size: 0.75rem;
     }
     
@@ -128,31 +133,31 @@ st.markdown("""
     .upload-section {
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         padding: 2rem;
-        border-radius: 15px;
-        border: 2px dashed #2d5a87;
+        border-radius: 10px;
+        border: 2px dashed #004C8F;
         text-align: center;
         margin-bottom: 2rem;
     }
     
-    /* Download button styling */
+    /* Download button styling - HDFC Red */
     .stDownloadButton > button {
-        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        background: linear-gradient(135deg, #004C8F 0%, #003366 100%);
         color: white;
         border: none;
         padding: 0.75rem 2rem;
-        border-radius: 25px;
+        border-radius: 6px;
         font-weight: 600;
         transition: all 0.3s ease;
     }
     
     .stDownloadButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        background: linear-gradient(135deg, #ED1C24 0%, #c41920 100%);
+        box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
     }
     
     /* Sidebar styling */
-    .css-1d391kg {
-        background: linear-gradient(180deg, #1e3a5f 0%, #2d5a87 100%);
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #004C8F 0%, #003366 100%);
     }
     
     /* Table styling */
@@ -160,12 +165,12 @@ st.markdown("""
         font-size: 0.85rem;
     }
     
-    /* Info box */
+    /* Info box - HDFC Blue */
     .info-box {
-        background-color: #e7f3ff;
-        border-left: 4px solid #2d5a87;
+        background-color: #e6f0fa;
+        border-left: 4px solid #004C8F;
         padding: 1rem;
-        border-radius: 0 10px 10px 0;
+        border-radius: 0 6px 6px 0;
         margin: 1rem 0;
     }
     
@@ -174,7 +179,15 @@ st.markdown("""
         background-color: #d4edda;
         border-left: 4px solid #28a745;
         padding: 1rem;
-        border-radius: 0 10px 10px 0;
+        border-radius: 0 6px 6px 0;
+        margin: 1rem 0;
+    }
+    
+    /* HDFC Accent line */
+    .hdfc-accent {
+        height: 4px;
+        background: linear-gradient(90deg, #004C8F 0%, #ED1C24 100%);
+        border-radius: 2px;
         margin: 1rem 0;
     }
 </style>
@@ -224,7 +237,7 @@ def check_api_health():
 
 
 def get_reasoning(row):
-    """Generate reasoning for the prediction based on lead attributes."""
+    """Generate professional reasoning for the prediction based on lead attributes."""
     reasons = []
     probability = row.get('Probability', 0)
     
@@ -232,58 +245,58 @@ def get_reasoning(row):
     cibil = row.get('cibil_score', None)
     if pd.notna(cibil):
         if cibil >= 750:
-            reasons.append(f"✅ Excellent credit score ({int(cibil)})")
+            reasons.append(f"Excellent credit score ({int(cibil)})")
         elif cibil >= 650:
-            reasons.append(f"📊 Good credit score ({int(cibil)})")
+            reasons.append(f"Good credit score ({int(cibil)})")
         else:
-            reasons.append(f"⚠️ Low credit score ({int(cibil)})")
+            reasons.append(f"Low credit score ({int(cibil)})")
     
     # Annual Income reasoning
     income = row.get('annual_income', None)
     if pd.notna(income):
         if income >= 1000000:
-            reasons.append(f"💰 High income (₹{income:,.0f})")
+            reasons.append(f"High income segment")
         elif income >= 500000:
-            reasons.append(f"💵 Moderate income (₹{income:,.0f})")
+            reasons.append(f"Moderate income segment")
         else:
-            reasons.append(f"📉 Lower income bracket")
+            reasons.append(f"Lower income bracket")
     
     # Account Tenure
     tenure = row.get('account_tenure_years', None)
     if pd.notna(tenure):
         if tenure >= 5:
-            reasons.append(f"🏦 Long-term customer ({int(tenure)} years)")
+            reasons.append(f"Long-term customer ({int(tenure)} years)")
         elif tenure >= 2:
-            reasons.append(f"👤 Established customer ({int(tenure)} years)")
+            reasons.append(f"Established customer ({int(tenure)} years)")
     
     # Credit Utilization
     util = row.get('credit_utilization_ratio', None)
     if pd.notna(util):
         if util <= 0.3:
-            reasons.append(f"✅ Low credit utilization ({util:.0%})")
+            reasons.append(f"Low credit utilization ({util:.0%})")
         elif util >= 0.7:
-            reasons.append(f"⚠️ High credit utilization ({util:.0%})")
+            reasons.append(f"High credit utilization ({util:.0%})")
     
     # Followup Count
     followups = row.get('followup_count', None)
     if pd.notna(followups):
         if followups >= 3:
-            reasons.append(f"📞 Multiple followups ({int(followups)})")
+            reasons.append(f"Multiple followups ({int(followups)})")
     
     # App Usage
     app_usage = row.get('mobile_app_usage', None)
     if pd.notna(app_usage) and app_usage == 'High':
-        reasons.append("📱 High app engagement")
+        reasons.append("High digital engagement")
     
     # Final reasoning based on probability
     if probability >= 0.7:
-        reasons.insert(0, "🎯 High conversion likelihood")
+        reasons.insert(0, "High conversion likelihood")
     elif probability >= 0.5:
-        reasons.insert(0, "📊 Moderate conversion chance")
+        reasons.insert(0, "Moderate conversion chance")
     else:
-        reasons.insert(0, "📉 Lower conversion probability")
+        reasons.insert(0, "Lower conversion probability")
     
-    return " | ".join(reasons[:4]) if reasons else "Insufficient data for reasoning"
+    return " | ".join(reasons[:4]) if reasons else "Insufficient data for analysis"
 
 
 def prepare_data_for_api(df):
@@ -383,28 +396,29 @@ def main():
     # Header
     st.markdown("""
     <div class="main-header">
-        <h1>🏦 HDFC Lead Prediction Dashboard</h1>
+        <h1>HDFC Bank Lead Prediction Dashboard</h1>
         <p>Upload your leads data, get AI-powered predictions, and download results</p>
     </div>
+    <div class="hdfc-accent"></div>
     """, unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
         st.image("https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg", width=200)
         st.markdown("---")
-        st.markdown("### 🔧 System Status")
+        st.markdown("### System Status")
         
         # Check API health
         health = check_api_health()
         if health and health.get('model_loaded'):
-            st.success("✅ API Connected")
-            st.info(f"📁 Model: {health.get('model_path', 'N/A')}")
+            st.success("API Connected")
+            st.info(f"Model: {health.get('model_path', 'N/A')}")
         else:
-            st.error("❌ API Not Connected")
+            st.error("API Not Connected")
             st.warning("Start the API with:\n```\nuvicorn api:app --port 8000\n```")
         
         st.markdown("---")
-        st.markdown("### 📊 About")
+        st.markdown("### About")
         st.markdown("""
         This dashboard uses a **Random Forest** model trained on 120k+ HDFC leads 
         to predict which leads are likely to convert.
@@ -418,12 +432,12 @@ def main():
         """)
         
         st.markdown("---")
-        st.markdown("### 🔗 Quick Links")
-        st.markdown("[📖 API Docs](http://localhost:8000/docs)")
-        st.markdown("[📈 MLflow Dashboard](http://localhost:5000)")
+        st.markdown("### Quick Links")
+        st.markdown("[API Documentation](http://localhost:8000/docs)")
+        st.markdown("[MLflow Dashboard](http://localhost:5000)")
     
     # Main content
-    st.markdown("### 📁 Upload Lead Data")
+    st.markdown("### Upload Lead Data")
     
     # File uploader
     uploaded_file = st.file_uploader(
@@ -436,17 +450,17 @@ def main():
         # Read the uploaded file
         try:
             df = pd.read_csv(uploaded_file)
-            st.success(f"✅ Loaded {len(df):,} records with {len(df.columns)} columns")
+            st.success(f"Loaded {len(df):,} records with {len(df.columns)} columns")
             
             # Show data preview
-            with st.expander("📋 Preview Uploaded Data", expanded=False):
+            with st.expander("Preview Uploaded Data", expanded=False):
                 st.dataframe(df.head(10), use_container_width=True)
             
             # Prediction button
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 predict_button = st.button(
-                    "🚀 Run Predictions",
+                    "Run Predictions",
                     type="primary",
                     use_container_width=True
                 )
@@ -454,11 +468,11 @@ def main():
             if predict_button:
                 # Check API
                 if not check_api_health():
-                    st.error("❌ Cannot connect to the prediction API. Please ensure it's running.")
+                    st.error("Cannot connect to the prediction API. Please ensure it's running.")
                     return
                 
                 # Run predictions
-                with st.spinner("🔄 Running predictions... This may take a moment for large datasets."):
+                with st.spinner("Running predictions... This may take a moment for large datasets."):
                     predictions = predict_batch(df)
                 
                 if predictions:
@@ -466,10 +480,10 @@ def main():
                     results_df = create_results_dataframe(df, predictions)
                     st.session_state['results'] = results_df
                     st.session_state['predictions'] = predictions
-                    st.success("✅ Predictions completed successfully!")
+                    st.success("Predictions completed successfully!")
         
         except Exception as e:
-            st.error(f"❌ Error reading CSV file: {str(e)}")
+            st.error(f"Error reading CSV file: {str(e)}")
             return
     
     # Display results if available
@@ -478,7 +492,7 @@ def main():
         predictions = st.session_state['predictions']
         
         st.markdown("---")
-        st.markdown("### 📊 Prediction Results")
+        st.markdown("### Prediction Results")
         
         # Summary metrics
         col1, col2, col3, col4 = st.columns(4)
@@ -504,7 +518,7 @@ def main():
             st.markdown(f"""
             <div class="metric-card">
                 <h3>Predicted Non-Conversions</h3>
-                <div class="value" style="color: #dc3545;">{non_conversions:,}</div>
+                <div class="value" style="color: #ED1C24;">{non_conversions:,}</div>
             </div>
             """, unsafe_allow_html=True)
         
@@ -519,7 +533,7 @@ def main():
         st.markdown("---")
         
         # Filter options
-        st.markdown("### 🔍 Filter Results")
+        st.markdown("### Filter Results")
         
         col1, col2, col3 = st.columns(3)
         
@@ -528,19 +542,19 @@ def main():
             products = ['All Products']
             if 'product_category' in results_df.columns:
                 products += results_df['product_category'].dropna().unique().tolist()
-            selected_product = st.selectbox("📦 Filter by Product", products)
+            selected_product = st.selectbox("Product Category", products)
         
         with col2:
             # Conversion status filter
             status_filter = st.selectbox(
-                "📊 Conversion Status",
+                "Conversion Status",
                 ['All', 'Will Convert', 'Will Not Convert']
             )
         
         with col3:
             # Confidence filter
             confidence_filter = st.selectbox(
-                "🎯 Confidence Level",
+                "Confidence Level",
                 ['All', 'High', 'Medium', 'Low']
             )
         
@@ -557,14 +571,14 @@ def main():
             filtered_df = filtered_df[filtered_df['Confidence'] == confidence_filter]
         
         # Show filtered count
-        st.info(f"📋 Showing {len(filtered_df):,} of {len(results_df):,} records")
+        st.info(f"Showing {len(filtered_df):,} of {len(results_df):,} records")
         
         # =================================================================
         # DYNAMIC INSIGHTS - 8 Key Metric Cards (same style as Prediction Results)
         # =================================================================
         if len(filtered_df) > 0:
             st.markdown("---")
-            st.markdown("### 📈 Segment Insights")
+            st.markdown("### Segment Insights")
             st.caption(f"*{selected_product} | {status_filter} | {confidence_filter}*")
             
             # Calculate all metrics
@@ -585,7 +599,7 @@ def main():
             with col1:
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>📊 Filtered Leads</h3>
+                    <h3>Filtered Leads</h3>
                     <div class="value">{filtered_total:,}</div>
                     <small style="color: #666;">{(filtered_total/len(results_df)*100):.1f}% of total</small>
                 </div>
@@ -594,7 +608,7 @@ def main():
             with col2:
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>✅ Will Convert</h3>
+                    <h3>Will Convert</h3>
                     <div class="value" style="color: #28a745;">{filtered_conversions:,}</div>
                     <small style="color: #28a745;">{conversion_rate:.1f}% rate</small>
                 </div>
@@ -603,8 +617,8 @@ def main():
             with col3:
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>🎯 Avg Probability</h3>
-                    <div class="value" style="color: #fd7e14;">{avg_probability:.1f}%</div>
+                    <h3>Avg Probability</h3>
+                    <div class="value" style="color: #004C8F;">{avg_probability:.1f}%</div>
                     <small style="color: #666;">conversion chance</small>
                 </div>
                 """, unsafe_allow_html=True)
@@ -612,8 +626,8 @@ def main():
             with col4:
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>⭐ Priority Leads</h3>
-                    <div class="value" style="color: #e83e8c;">{priority_leads:,}</div>
+                    <h3>Priority Leads</h3>
+                    <div class="value" style="color: #ED1C24;">{priority_leads:,}</div>
                     <small style="color: #666;">high prob + conf</small>
                 </div>
                 """, unsafe_allow_html=True)
@@ -623,60 +637,60 @@ def main():
             
             with col1:
                 cibil_display = f"{avg_cibil:.0f}" if pd.notna(avg_cibil) else "N/A"
-                cibil_color = "#28a745" if pd.notna(avg_cibil) and avg_cibil >= 700 else "#dc3545"
+                cibil_color = "#28a745" if pd.notna(avg_cibil) and avg_cibil >= 700 else "#ED1C24"
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>📊 Avg CIBIL</h3>
+                    <h3>Avg CIBIL Score</h3>
                     <div class="value" style="color: {cibil_color};">{cibil_display}</div>
-                    <small style="color: #666;">{"Good" if pd.notna(avg_cibil) and avg_cibil >= 700 else "Low"}</small>
+                    <small style="color: #666;">{"Good" if pd.notna(avg_cibil) and avg_cibil >= 700 else "Below threshold"}</small>
                 </div>
                 """, unsafe_allow_html=True)
             
             with col2:
-                income_display = f"₹{avg_income/100000:.1f}L" if pd.notna(avg_income) else "N/A"
+                income_display = f"Rs.{avg_income/100000:.1f}L" if pd.notna(avg_income) else "N/A"
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>💰 Avg Income</h3>
-                    <div class="value" style="color: #17a2b8;">{income_display}</div>
-                    <small style="color: #666;">per year</small>
+                    <h3>Avg Income</h3>
+                    <div class="value" style="color: #004C8F;">{income_display}</div>
+                    <small style="color: #666;">per annum</small>
                 </div>
                 """, unsafe_allow_html=True)
             
             with col3:
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>🔥 High Probability</h3>
-                    <div class="value" style="color: #fd7e14;">{high_prob_leads:,}</div>
-                    <small style="color: #666;">≥70% chance</small>
+                    <h3>High Probability</h3>
+                    <div class="value" style="color: #28a745;">{high_prob_leads:,}</div>
+                    <small style="color: #666;">70%+ chance</small>
                 </div>
                 """, unsafe_allow_html=True)
             
             with col4:
                 st.markdown(f"""
                 <div class="metric-card">
-                    <h3>💎 High Value</h3>
-                    <div class="value" style="color: #6f42c1;">{high_income:,}</div>
-                    <small style="color: #666;">income ≥₹10L</small>
+                    <h3>High Value Leads</h3>
+                    <div class="value" style="color: #004C8F;">{high_income:,}</div>
+                    <small style="color: #666;">income 10L+</small>
                 </div>
                 """, unsafe_allow_html=True)
             
             # Quick Insight Summary
             if conversion_rate >= 70:
-                insight_text = f"🎉 <strong>Excellent segment!</strong> {conversion_rate:.0f}% predicted to convert"
+                insight_text = f"<strong>Excellent segment!</strong> {conversion_rate:.0f}% predicted to convert"
                 insight_color = "#28a745"
             elif conversion_rate >= 50:
-                insight_text = f"👍 <strong>Good potential</strong> - {conversion_rate:.0f}% conversion rate"
-                insight_color = "#ffc107"
+                insight_text = f"<strong>Good potential</strong> - {conversion_rate:.0f}% conversion rate"
+                insight_color = "#004C8F"
             else:
-                insight_text = f"⚠️ <strong>Needs attention</strong> - Only {conversion_rate:.0f}% predicted to convert"
-                insight_color = "#dc3545"
+                insight_text = f"<strong>Needs attention</strong> - Only {conversion_rate:.0f}% predicted to convert"
+                insight_color = "#ED1C24"
             
             if priority_leads > 0:
-                insight_text += f" | ⭐ Focus on {priority_leads} priority leads!"
+                insight_text += f" | Focus on {priority_leads} priority leads"
             
             st.markdown(f"""
             <div style="background-color: {insight_color}20; border-left: 4px solid {insight_color}; 
-                        padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0;">
+                        padding: 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0;">
                 {insight_text}
             </div>
             """, unsafe_allow_html=True)
@@ -710,12 +724,12 @@ def main():
         )
         
         if len(filtered_df) > 100:
-            st.caption(f"⚠️ Showing first 100 records. Download to see all {len(filtered_df):,} records.")
+            st.caption(f"Note: Showing first 100 records. Download to see all {len(filtered_df):,} records.")
         
         st.markdown("---")
         
         # Download section
-        st.markdown("### 📥 Download Results")
+        st.markdown("### Download Results")
         
         col1, col2 = st.columns(2)
         
@@ -784,7 +798,7 @@ def main():
                 
                 with cols[idx % len(cols)]:
                     st.download_button(
-                        label=f"📥 {product}",
+                        label=f"Download {product}",
                         data=product_csv,
                         file_name=f"leads_{product.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.csv",
                         mime="text/csv",
