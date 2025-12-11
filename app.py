@@ -424,8 +424,8 @@ def main():
         to predict which leads are likely to convert.
         
         **Features:**
-        - Upload CSV data
-        - Get instant predictions
+        - Upload CSV data for batch predictions
+        - Manual entry for individual leads
         - View reasoning for each prediction
         - Filter by product
         - Download results
@@ -436,15 +436,21 @@ def main():
         st.markdown("[API Documentation](http://localhost:8000/docs)")
         st.markdown("[MLflow Dashboard](http://localhost:5000)")
     
-    # Main content
-    st.markdown("### Upload Lead Data")
+    # Page Selection with Tabs
+    tab1, tab2 = st.tabs(["Batch Upload", "Manual Entry"])
     
-    # File uploader
-    uploaded_file = st.file_uploader(
-        "Choose a CSV file with lead data",
-        type=['csv'],
-        help="Upload a CSV file containing lead information. The file should have columns like gender, age, cibil_score, etc."
-    )
+    # =================================================================
+    # TAB 1: Batch Upload
+    # =================================================================
+    with tab1:
+        st.markdown("### Upload Lead Data")
+        
+        # File uploader
+        uploaded_file = st.file_uploader(
+            "Choose a CSV file with lead data",
+            type=['csv'],
+            help="Upload a CSV file containing lead information. The file should have columns like gender, age, cibil_score, etc."
+        )
     
     if uploaded_file is not None:
         # Read the uploaded file
@@ -805,21 +811,214 @@ def main():
                         key=f"download_{product}"
                     )
     
-    else:
-        # Show instructions when no data is loaded
-        st.markdown("""
-        <div class="info-box">
-            <h4>📝 How to use this dashboard:</h4>
-            <ol>
-                <li><strong>Ensure the API is running</strong> - Check the sidebar for connection status</li>
-                <li><strong>Upload your CSV file</strong> - Click the upload button above</li>
-                <li><strong>Click "Run Predictions"</strong> - The model will analyze each lead</li>
-                <li><strong>View results</strong> - See predictions with reasoning</li>
-                <li><strong>Download</strong> - Export results as CSV</li>
-            </ol>
-        </div>
-        """, unsafe_allow_html=True)
+        else:
+            # Show instructions when no data is loaded
+            st.markdown("""
+            <div class="info-box">
+                <h4>How to use Batch Upload:</h4>
+                <ol>
+                    <li><strong>Ensure the API is running</strong> - Check the sidebar for connection status</li>
+                    <li><strong>Upload your CSV file</strong> - Click the upload button above</li>
+                    <li><strong>Click "Run Predictions"</strong> - The model will analyze each lead</li>
+                    <li><strong>View results</strong> - See predictions with reasoning</li>
+                    <li><strong>Download</strong> - Export results as CSV</li>
+                </ol>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    # =================================================================
+    # TAB 2: Manual Entry
+    # =================================================================
+    with tab2:
+        st.markdown("### Manual Lead Entry")
+        st.markdown("Enter lead details below to get an individual prediction.")
+        
+        # Check API status first
+        if not check_api_health():
+            st.error("API is not connected. Please start the API first.")
+        else:
+            # Create form for manual entry
+            with st.form("manual_entry_form"):
+                st.markdown("#### Customer Demographics")
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    gender = st.selectbox("Gender", ["Male", "Female", "Other"])
+                with col2:
+                    age = st.number_input("Age", min_value=18, max_value=100, value=35)
+                with col3:
+                    marital_status = st.selectbox("Marital Status", ["Single", "Married", "Divorced", "Widowed"])
+                with col4:
+                    dependents_count = st.number_input("Dependents", min_value=0, max_value=10, value=0)
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    education_level = st.selectbox("Education", ["10th", "12th", "Graduate", "Post Graduate", "Professional"])
+                with col2:
+                    occupation = st.selectbox("Occupation", ["Salaried", "Self-Employed", "Business", "Professional", "Student", "Retired"])
+                with col3:
+                    annual_income = st.number_input("Annual Income (Rs.)", min_value=0, max_value=50000000, value=500000, step=50000)
+                
+                st.markdown("---")
+                st.markdown("#### Location Details")
+                col1, col2 = st.columns(2)
+                with col1:
+                    city = st.text_input("City", value="Chennai")
+                with col2:
+                    pincode = st.number_input("Pincode", min_value=100000, max_value=999999, value=600001)
+                
+                st.markdown("---")
+                st.markdown("#### Banking Details")
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    cibil_score = st.number_input("CIBIL Score", min_value=300, max_value=900, value=700)
+                with col2:
+                    credit_utilization_ratio = st.slider("Credit Utilization %", min_value=0, max_value=100, value=30) / 100
+                with col3:
+                    existing_loans_count = st.number_input("Existing Loans", min_value=0, max_value=10, value=0)
+                with col4:
+                    existing_monthly_emi = st.number_input("Monthly EMI (Rs.)", min_value=0, max_value=500000, value=0)
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    avg_monthly_balance = st.number_input("Avg Monthly Balance (Rs.)", min_value=0, max_value=10000000, value=50000)
+                with col2:
+                    account_tenure_years = st.number_input("Account Tenure (years)", min_value=0.0, max_value=50.0, value=3.0, step=0.5)
+                with col3:
+                    credit_card_spend_last_6m = st.number_input("Credit Card Spend (6 months)", min_value=0, max_value=5000000, value=50000)
+                
+                st.markdown("---")
+                st.markdown("#### Digital Engagement")
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    mobile_app_usage = st.selectbox("Mobile App Usage", ["None", "Low", "Medium", "High"])
+                with col2:
+                    netbanking_active = st.selectbox("Netbanking Active", ["Yes", "No"])
+                with col3:
+                    avg_monthly_app_visits = st.number_input("Avg Monthly App Visits", min_value=0, max_value=100, value=5)
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    preferred_language = st.selectbox("Preferred Language", ["English", "Hindi", "Tamil", "Telugu", "Kannada", "Malayalam", "Marathi", "Bengali", "Gujarati"])
+                with col2:
+                    contact_channel_preference = st.selectbox("Contact Preference", ["Email", "SMS", "Phone", "WhatsApp"])
+                
+                st.markdown("---")
+                st.markdown("#### Lead Information")
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    product_category = st.selectbox("Product Category", ["Home Loan", "Personal Loan", "Credit Card", "Vehicle Loan", "Insurance", "Deposits"])
+                with col2:
+                    sub_product = st.text_input("Sub Product", value="Standard")
+                with col3:
+                    lead_source = st.selectbox("Lead Source", ["Website", "Branch Walk-in", "Referral", "Digital", "Telemarketing", "Partner"])
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    campaign_name = st.text_input("Campaign Name", value="General")
+                with col2:
+                    website_lead_source = st.selectbox("Website Source", ["Organic", "Paid", "Referral", "Direct", "Social Media"])
+                with col3:
+                    followup_count = st.number_input("Followup Count", min_value=0, max_value=20, value=0)
+                
+                st.markdown("---")
+                
+                # Submit button
+                submitted = st.form_submit_button("Get Prediction", type="primary", use_container_width=True)
+                
+                if submitted:
+                    # Prepare data for API
+                    lead_data = {
+                        "gender": gender[0] if gender != "Other" else "O",  # M, F, O
+                        "age": age,
+                        "marital_status": marital_status,
+                        "dependents_count": dependents_count,
+                        "education_level": education_level,
+                        "occupation": occupation,
+                        "annual_income": annual_income,
+                        "city": city,
+                        "pincode": pincode,
+                        "preferred_language": preferred_language,
+                        "contact_channel_preference": contact_channel_preference,
+                        "mobile_app_usage": mobile_app_usage,
+                        "netbanking_active": netbanking_active,
+                        "avg_monthly_app_visits": avg_monthly_app_visits,
+                        "credit_card_spend_last_6m": credit_card_spend_last_6m,
+                        "cibil_score": cibil_score,
+                        "credit_utilization_ratio": credit_utilization_ratio,
+                        "existing_loans_count": existing_loans_count,
+                        "existing_monthly_emi": existing_monthly_emi,
+                        "avg_monthly_balance": avg_monthly_balance,
+                        "account_tenure_years": account_tenure_years,
+                        "website_lead_source": website_lead_source,
+                        "product_category": product_category,
+                        "sub_product": sub_product,
+                        "lead_source": lead_source,
+                        "campaign_name": campaign_name,
+                        "followup_count": followup_count,
+                        "data_year": 2024
+                    }
+                    
+                    # Make API call
+                    with st.spinner("Getting prediction..."):
+                        try:
+                            response = requests.post(
+                                f"{API_BASE_URL}/predict",
+                                json=lead_data,
+                                timeout=30
+                            )
+                            
+                            if response.status_code == 200:
+                                result = response.json()
+                                
+                                st.markdown("---")
+                                st.markdown("### Prediction Result")
+                                
+                                # Display result in cards
+                                col1, col2, col3 = st.columns(3)
+                                
+                                with col1:
+                                    prediction_text = "Will Convert" if result['prediction'] == 1 else "Will Not Convert"
+                                    prediction_color = "#28a745" if result['prediction'] == 1 else "#ED1C24"
+                                    st.markdown(f"""
+                                    <div class="metric-card">
+                                        <h3>Prediction</h3>
+                                        <div class="value" style="color: {prediction_color};">{prediction_text}</div>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                
+                                with col2:
+                                    st.markdown(f"""
+                                    <div class="metric-card">
+                                        <h3>Probability</h3>
+                                        <div class="value" style="color: #004C8F;">{result['probability']*100:.1f}%</div>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                
+                                with col3:
+                                    confidence_color = "#28a745" if result['confidence'] == "High" else ("#004C8F" if result['confidence'] == "Medium" else "#ED1C24")
+                                    st.markdown(f"""
+                                    <div class="metric-card">
+                                        <h3>Confidence</h3>
+                                        <div class="value" style="color: {confidence_color};">{result['confidence']}</div>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                
+                                # Generate reasoning
+                                lead_data['Probability'] = result['probability']
+                                reasoning = get_reasoning(lead_data)
+                                
+                                st.markdown("#### Analysis")
+                                st.info(reasoning)
+                                
+                            else:
+                                st.error(f"API Error: {response.status_code} - {response.text}")
+                        
+                        except Exception as e:
+                            st.error(f"Error making prediction: {str(e)}")
 
 
 if __name__ == "__main__":
     main()
+
