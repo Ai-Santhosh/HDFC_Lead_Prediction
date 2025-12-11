@@ -1,0 +1,66 @@
+# =============================================================================
+# ML Pipeline Configuration - Simple & Beginner Friendly
+# =============================================================================
+
+# Project Info
+project:
+  name: "HDFC_Lead_Prediction"
+  version: "1.0.0"
+
+# Data Configuration
+data:
+  # CSV file path
+  csv_filepath: "HDFC_TN_Leads_120k.csv"
+  
+  # Target column
+  target_column: "conversion_flag"
+  
+  # Columns to drop (IDs, PII, target leakage)
+  drop_columns:
+    - "customer_id"
+    - "first_name"
+    - "last_name"
+    - "mobile_number"
+    - "email"
+    - "lead_id"
+    - "conversion_date"
+    - "revenue_generated"
+    - "lead_status_reason"
+    - "lead_stage"
+    - "expected_conversion_probability"
+    - "created_timestamp"
+    - "updated_timestamp"
+    - "assigned_rm_name"
+  
+  # Date columns to convert to features
+  date_columns:
+    - "date_of_birth"
+    - "last_login_date"
+    - "lead_creation_date"
+    - "last_followup_date"
+
+# Preprocessing Configuration
+preprocessing:
+  test_size: 0.2
+  random_state: 42
+
+# Model Configuration - Best parameters from notebook
+model:
+  name: "random_forest"
+  params:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 2
+    min_samples_leaf: 1
+    random_state: 42
+
+# MLflow Configuration
+mlflow:
+  tracking_uri: "mlruns"
+  experiment_name: "HDFC_Lead_Prediction"
+  model_name: "lead_prediction_model"
+
+# Output paths
+output:
+  model_path: "models/best_model.pkl"
+  log_file: "logs/pipeline.log"
