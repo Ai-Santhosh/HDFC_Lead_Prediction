@@ -338,33 +338,86 @@ def prepare_data_for_api(df):
     return df_clean
 
 
-def predict_batch(df):
-    """Send batch prediction request to FastAPI."""
+def predict_batch(df, chunk_size=100):
+    """Send batch prediction request to FastAPI with chunked processing for large datasets."""
     # Prepare data
     df_clean = prepare_data_for_api(df)
     
     # Convert DataFrame to list of dicts (handling NaN values)
-    leads = df_clean.replace({np.nan: None}).to_dict(orient='records')
+    all_leads = df_clean.replace({np.nan: None}).to_dict(orient='records')
+    total_leads = len(all_leads)
     
-    # Make API request
-    try:
-        response = requests.post(
-            f"{API_BASE_URL}/predict/batch",
-            json={"leads": leads},
-            timeout=120
+    # For small datasets, process in one go
+    if total_leads <= chunk_size:
+        try:
+            response = requests.post(
+                f"{API_BASE_URL}/predict/batch",
+                json={"leads": all_leads},
+                timeout=120
+            )
+            
+            if response.status_code == 200:
+                return response.json()
+            else:
+                st.error(f"API Error: {response.json().get('detail', 'Unknown error')}")
+                return None
+        except requests.exceptions.Timeout:
+            st.error("Request timed out. Try with fewer records.")
+            return None
+        except Exception as e:
+            st.error(f"Connection error: {str(e)}")
+            return None
+    
+    # For large datasets, process in chunks with progress bar
+    all_predictions = []
+    progress_bar = st.progress(0, text="Processing predictions...")
+    
+    num_chunks = (total_leads + chunk_size - 1) // chunk_size
+    
+    for i in range(0, total_leads, chunk_size):
+        chunk = all_leads[i:i + chunk_size]
+        chunk_num = i // chunk_size + 1
+        
+        progress_bar.progress(
+            chunk_num / num_chunks, 
+            text=f"Processing batch {chunk_num}/{num_chunks} ({min(i + chunk_size, total_leads)}/{total_leads} leads)..."
         )
         
-        if response.status_code == 200:
-            return response.json()
-        else:
-            st.error(f"API Error: {response.json().get('detail', 'Unknown error')}")
+        try:
+            response = requests.post(
+                f"{API_BASE_URL}/predict/batch",
+                json={"leads": chunk},
+                timeout=60
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                all_predictions.extend(result['predictions'])
+            else:
+                st.error(f"API Error on batch {chunk_num}: {response.json().get('detail', 'Unknown error')}")
+                progress_bar.empty()
+                return None
+                
+        except requests.exceptions.Timeout:
+            st.error(f"Batch {chunk_num} timed out. Try reducing chunk size.")
+            progress_bar.empty()
             return None
-    except requests.exceptions.Timeout:
-        st.error("Request timed out. Try with fewer records.")
-        return None
-    except Exception as e:
-        st.error(f"Connection error: {str(e)}")
-        return None
+        except Exception as e:
+            st.error(f"Connection error on batch {chunk_num}: {str(e)}")
+            progress_bar.empty()
+            return None
+    
+    progress_bar.progress(1.0, text="Processing complete!")
+    
+    # Combine all predictions
+    predicted_conversions = sum(1 for p in all_predictions if p['prediction'] == 1)
+    
+    return {
+        'predictions': all_predictions,
+        'total_leads': total_leads,
+        'predicted_conversions': predicted_conversions,
+        'conversion_rate': (predicted_conversions / total_leads * 100) if total_leads > 0 else 0
+    }
 
 
 def create_results_dataframe(original_df, predictions):
